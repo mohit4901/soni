@@ -25,11 +25,12 @@ const Navbar = () => {
   }
 
   return (
-   
-    <div className="w-full ">
-       <AnnouncementBar/>
+    <div className="w-full">
 
-      {/* 🔹 TOP INFO BAR */}
+      {/* 🔹 Announcement Bar */}
+      <AnnouncementBar />
+
+      {/* 🔹 TOP INFO BAR (Desktop only) */}
       <div className="hidden sm:flex justify-between items-center px-6 py-2 text-[15px] border-b">
         <p>+91-8888888888 &nbsp; | &nbsp; support@sonimonicoll.com</p>
         <div className="flex items-center gap-4">
@@ -38,11 +39,15 @@ const Navbar = () => {
       </div>
 
       {/* 🔹 MAIN NAVBAR */}
-      <div className="flex bg-[#f7e9d6] items-center justify-between px-6 py-4 font-medium">
+      <div className="flex bg-[#f7e9d6] items-center justify-between px-4 sm:px-6 py-2 sm:py-4 font-medium">
 
         {/* Logo */}
         <Link to="/">
-          <img src={assets.logo} className="w-40" alt="logo" />
+          <img
+            src={assets.logo}
+            className="w-28 sm:w-40"
+            alt="logo"
+          />
         </Link>
 
         {/* Desktop Menu */}
@@ -56,18 +61,21 @@ const Navbar = () => {
         </ul>
 
         {/* Right Icons */}
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-4 sm:gap-5">
+
+          {/* Search */}
           <img
             onClick={() => { setShowSearch(true); navigate('/collection') }}
             src={assets.search_icon}
-            className="w-4 cursor-pointer"
+            className="w-4 sm:w-5 cursor-pointer"
             alt=""
           />
 
+          {/* Profile */}
           <div className="group relative">
             <img
               onClick={() => token ? null : navigate('/login')}
-              className="w-4 cursor-pointer"
+              className="w-4 sm:w-5 cursor-pointer"
               src={assets.profile_icon}
               alt=""
             />
@@ -75,15 +83,30 @@ const Navbar = () => {
               <div className="hidden group-hover:block absolute right-0 pt-4">
                 <div className="flex flex-col gap-2 w-36 py-3 px-5 bg-white border text-sm">
                   <p className="cursor-pointer hover:text-black">My Profile</p>
-                  <p onClick={() => navigate('/orders')} className="cursor-pointer hover:text-black">Orders</p>
-                  <p onClick={logout} className="cursor-pointer hover:text-black">Logout</p>
+                  <p
+                    onClick={() => navigate('/orders')}
+                    className="cursor-pointer hover:text-black"
+                  >
+                    Orders
+                  </p>
+                  <p
+                    onClick={logout}
+                    className="cursor-pointer hover:text-black"
+                  >
+                    Logout
+                  </p>
                 </div>
               </div>
             )}
           </div>
 
+          {/* Cart */}
           <Link to="/cart" className="relative">
-            <img src={assets.cart_icon} className="w-4 min-w-4" alt="" />
+            <img
+              src={assets.cart_icon}
+              className="w-4 sm:w-5 min-w-4"
+              alt=""
+            />
             <p className="absolute -right-2 -bottom-2 w-4 text-center leading-4 bg-black text-white aspect-square rounded-full text-[9px]">
               {getCartCount()}
             </p>
@@ -93,23 +116,43 @@ const Navbar = () => {
           <img
             onClick={() => setVisible(true)}
             src={assets.menu_icon}
-            className="w-5 cursor-pointer sm:hidden "
+            className="w-4 sm:w-5 cursor-pointer sm:hidden"
             alt=""
           />
         </div>
       </div>
 
-      {/* 🔹 MOBILE SIDEBAR (UNCHANGED LOGIC) */}
-      <div className={`absolute top-0 right-0 bottom-0 bg-white overflow-hidden transition-all ${visible ? 'w-full' : 'w-0'}`}>
+      {/* 🔹 MOBILE SIDEBAR */}
+      <div
+        className={`absolute top-0 right-0 bottom-0 bg-white overflow-hidden transition-all duration-300 ${
+          visible ? 'w-full' : 'w-0'
+        }`}
+      >
         <div className="flex flex-col text-gray-600">
-          <div onClick={() => setVisible(false)} className="flex items-center gap-4 p-4 cursor-pointer">
-            <img className="h-4 rotate-180" src={assets.dropdown_icon} alt="" />
+          <div
+            onClick={() => setVisible(false)}
+            className="flex items-center gap-4 p-4 cursor-pointer"
+          >
+            <img
+              className="h-4 rotate-180"
+              src={assets.dropdown_icon}
+              alt=""
+            />
             <p>Back</p>
           </div>
-          <NavLink onClick={() => setVisible(false)} className="py-3 pl-6 border" to="/">HOME</NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-3 pl-6 border" to="/collection">CATEGORIES</NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-3 pl-6 border" to="/about">ABOUT</NavLink>
-          <NavLink onClick={() => setVisible(false)} className="py-3 pl-6 border" to="/contact">CONTACT</NavLink>
+
+          <NavLink onClick={() => setVisible(false)} className="py-3 pl-6 border" to="/">
+            HOME
+          </NavLink>
+          <NavLink onClick={() => setVisible(false)} className="py-3 pl-6 border" to="/collection">
+            CATEGORIES
+          </NavLink>
+          <NavLink onClick={() => setVisible(false)} className="py-3 pl-6 border" to="/about">
+            ABOUT
+          </NavLink>
+          <NavLink onClick={() => setVisible(false)} className="py-3 pl-6 border" to="/contact">
+            CONTACT
+          </NavLink>
         </div>
       </div>
 
