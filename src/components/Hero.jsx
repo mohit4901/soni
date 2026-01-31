@@ -1,37 +1,99 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { assets } from "../assets/assets"
 
+const slides = [
+  {
+    img: assets.hero_bg,
+    title: "New Arrival",
+    subtitle: "Fresh Drops. Timeless Style",
+    btn: "SHOP NOW",
+  },
+  {
+    img: assets.hero_offer,
+    title: "UP TO 30% OFF",
+    subtitle: "On Selected Styles",
+    btn: "SHOP SALE",
+  },
+  {
+    img: assets.hero_suits,
+    title: "SUITS UNDER ₹1500",
+    subtitle: "Style That Fits Your Budget",
+    btn: "EXPLORE SUITS",
+  },
+]
+
 const Hero = () => {
+  const [current, setCurrent] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % slides.length)
+    }, 4000)
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <section className="relative w-full min-h-screen pt-[140px] overflow-hidden">
+    <section className="relative w-full overflow-hidden">
 
-      {/* Background Image */}
-      <img
-        src={assets.hero_bg}
-        alt=""
-        className="absolute inset-0 w-full h-full object-cover opacity-80"
-      />
+      {/* Carousel Wrapper */}
+      <div className="
+        relative
+        w-full
+        h-[56vw]        /* Mobile 16:9 */
+        sm:h-[70vh]
+        lg:h-screen
+      ">
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`
+              absolute inset-0 transition-opacity duration-1000
+              ${index === current ? "opacity-100 z-10" : "opacity-0 z-0"}
+            `}
+          >
+            {/* Background Image */}
+            <img
+              src={slide.img}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+            />
 
-      {/* Overlay */}
-      <div className="absolute inset-0 bg-black/25" />
+            {/* Overlay */}
+            <div className="absolute inset-0 bg-black/30" />
 
-      {/* Content */}
-      <div className="relative z-10 flex items-center h-[calc(100vh-140px)]">
-        <div className="max-w-[1400px] mx-auto px-10 w-full">
-          <div className="max-w-xl">
-            <h1 className="prata-regular text-[56px] text-white leading-tight">
-              New Arrival
-            </h1>
+            {/* Content */}
+            <div className="absolute inset-0 flex items-center">
+              <div className="max-w-[1400px] mx-auto px-6 sm:px-10 w-full">
+                <div className="max-w-xl">
+                  <h1 className="prata-regular text-3xl sm:text-5xl lg:text-[56px] text-white leading-tight">
+                    {slide.title}
+                  </h1>
 
-            <p className="mt-4 text-lg text-white/90">
-              Fresh Drops. Timeless Style
-            </p>
+                  <p className="mt-3 sm:mt-4 text-sm sm:text-lg text-white/90">
+                    {slide.subtitle}
+                  </p>
 
-            <button className="mt-8 px-8 py-3 rounded-full bg-white text-black text-sm tracking-wide hover:bg-gray-100 transition">
-              SHOP NOW
-            </button>
+                  <button className="mt-6 sm:mt-8 px-6 sm:px-8 py-2.5 sm:py-3 rounded-full bg-white text-black text-xs sm:text-sm tracking-wide hover:bg-gray-100 transition">
+                    {slide.btn}
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
+        ))}
+      </div>
+
+      {/* Dots */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-20">
+        {slides.map((_, index) => (
+          <span
+            key={index}
+            className={`w-2 h-2 rounded-full transition ${
+              index === current ? "bg-white" : "bg-white/50"
+            }`}
+          />
+        ))}
       </div>
 
     </section>
