@@ -31,6 +31,8 @@ import hero_flower from './hero_flower.jpg'
 import hero_circle from './hero_circle.png'
 import hero_dot from './hero_dot.png'
 import hero_bg from './hero_bg.avif'
+import hero_suit from './hero_suit.avif'
+import hero_offer from './hero_offer.avif'
 import map_placeholder from './map_placeholder.jpg'
 import contact_icon_phone from './contact_icon_phone.png'
 import contact_icon_email from './contact_icon_email.png'
@@ -109,6 +111,8 @@ export const assets = {
     category_kurti,
   category_lehenga,
   footer_bg,
+    hero_suit,
+    hero_offer,
   category_saree,
   category_gown,
   category_suit,
@@ -777,5 +781,6 @@ export const products = [
         date: 1716668445448,
         bestseller: false
     }
+
 
 ]
