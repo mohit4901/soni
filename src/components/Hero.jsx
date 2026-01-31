@@ -15,7 +15,7 @@ const slides = [
     btn: "SHOP SALE",
   },
   {
-    img: assets.hero_suits,
+    img: assets.hero_suit,
     title: "SUITS UNDER ₹1500",
     subtitle: "Style That Fits Your Budget",
     btn: "EXPLORE SUITS",
@@ -101,3 +101,4 @@ const Hero = () => {
 }
 
 export default Hero
+
