@@ -63,3 +63,5 @@ const CategoryCard = ({ img, label }) => (
 
   </div>
 )
+
+export default Categories
